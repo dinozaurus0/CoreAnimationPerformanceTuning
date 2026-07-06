@@ -20,7 +20,7 @@ final class ViewController: UIViewController {
         let gradientLayer = gradientLayer()
         let squareLayer = squareLayer()
         
-        let (gradientAnimation, ringAnimation, squareAnimation) =
+        let (gradientAnimation, ringAnimation, squareAnimation, captionAnimation) =
 //        DispatchQueue.global().sync {
             (
                 gradientColorsAnimation(using: gradientLayer.colors),
@@ -28,7 +28,8 @@ final class ViewController: UIViewController {
                 squareLayerAnimation(
                     from: squareLayer.position.x - 60,
                     toValue: squareLayer.position.x + 60
-                )
+                ),
+                captionLayerAnimation()
             )
 //        }
         
@@ -42,6 +43,11 @@ final class ViewController: UIViewController {
         
         squareLayer.add(squareAnimation, forKey: "squareMoveLeftRight")
         gradientLayer.addSublayer(squareLayer)
+        
+        let captionLayer = captionLayer()
+        gradientLayer.addSublayer(captionLayer)
+        
+        captionLayer.add(captionAnimation, forKey: "captionTransform")
     }
     
     private func gradientLayer() -> CAGradientLayer {
@@ -166,6 +172,48 @@ final class ViewController: UIViewController {
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         
         return animation
+    }
+    
+    private func captionLayer() -> CATextLayer {
+        let captionLayer = CATextLayer()
+        
+        captionLayer.bounds = CGRect(
+            x: 0,
+            y: 0,
+            width: bounds.width - 40,
+            height: 30
+        )
+        captionLayer.position = CGPoint(x: bounds.width / 2, y: bounds.height / 4)
+        
+        captionLayer.string = "CALayer Hierarchy"
+        captionLayer.font = UIFont.boldSystemFont(ofSize: 20)
+        captionLayer.fontSize = 20
+        captionLayer.alignmentMode = .center
+        captionLayer.foregroundColor = UIColor.white.cgColor
+        
+        return captionLayer
+    }
+    
+    private func captionLayerAnimation() -> CABasicAnimation {
+        var start = CATransform3DIdentity
+        start.m34 = -1.0 / 500.0
+        start = CATransform3DScale(start, 0.85, 0.85, 1)
+
+        var end = CATransform3DIdentity
+        end.m34 = -1.0 / 500.0
+        end = CATransform3DRotate(end, .pi / 10, 0, 1, 0)
+        end = CATransform3DScale(end, 1.1, 1.1, 1)
+
+        let transformAnimation = CABasicAnimation(keyPath: "transform")
+        transformAnimation.fromValue = start
+        transformAnimation.toValue = end
+        
+        transformAnimation.duration = 1.8
+        transformAnimation.autoreverses = true
+        transformAnimation.repeatCount = .infinity
+        transformAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        
+        return transformAnimation
     }
     
 }
