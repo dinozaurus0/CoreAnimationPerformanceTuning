@@ -18,36 +18,38 @@ final class ViewController: UIViewController {
     
     private func setupLayers() {
         let gradientLayer = gradientLayer()
+        
         let squareLayer = squareLayer()
+        gradientLayer.addSublayer(squareLayer)
         
-        let (gradientAnimation, ringAnimation, squareAnimation, captionAnimation) =
-//        DispatchQueue.global().sync {
-            (
-                gradientColorsAnimation(using: gradientLayer.colors),
-                ringLayerAnimation(),
-                squareLayerAnimation(
-                    from: squareLayer.position.x - 60,
-                    toValue: squareLayer.position.x + 60
-                ),
-                captionLayerAnimation()
-            )
-//        }
-        
-        gradientLayer.add(gradientAnimation, forKey: "gradientColorShift")
         view.layer.addSublayer(gradientLayer)
         
         let ringLayer = ringLayer()
-        
         gradientLayer.addSublayer(ringLayer)
-        ringLayer.add(ringAnimation, forKey: "ringDrawAndSpin")
-        
-        squareLayer.add(squareAnimation, forKey: "squareMoveLeftRight")
-        gradientLayer.addSublayer(squareLayer)
         
         let captionLayer = captionLayer()
         gradientLayer.addSublayer(captionLayer)
         
-        captionLayer.add(captionAnimation, forKey: "captionTransform")
+//        DispatchQueue.global().async {
+//            assert(!Thread.current.isMainThread)
+            let (gradientAnimation, ringAnimation, squareAnimation, captionAnimation) = (
+                self.gradientColorsAnimation(using: gradientLayer.colors),
+                self.ringLayerAnimation(),
+                self.squareLayerAnimation(
+                    from: squareLayer.position.x - 60,
+                    toValue: squareLayer.position.x + 60
+                ),
+                self.captionLayerAnimation()
+            )
+            
+//            DispatchQueue.main.async {
+                gradientLayer.add(gradientAnimation, forKey: "gradientColorShift")
+                ringLayer.add(ringAnimation, forKey: "ringDrawAndSpin")
+                squareLayer.add(squareAnimation, forKey: "squareMoveLeftRight")
+                captionLayer.add(captionAnimation, forKey: "captionTransform")
+//            }
+//        }
+        
     }
     
     private func gradientLayer() -> CAGradientLayer {
