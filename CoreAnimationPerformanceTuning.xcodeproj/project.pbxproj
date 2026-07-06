@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		2865E1212FFC026A00C7330C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2865E0F32FFBDCB500C7330C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2865E0FA2FFBDCB500C7330C;
+			remoteInfo = CoreAnimationPerformanceTuning;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2865E0FB2FFBDCB500C7330C /* CoreAnimationPerformanceTuning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreAnimationPerformanceTuning.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2865E11D2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreAnimationPerformanceTuningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -29,10 +40,22 @@
 			path = CoreAnimationPerformanceTuning;
 			sourceTree = "<group>";
 		};
+		2865E11E2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CoreAnimationPerformanceTuningTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2865E0F82FFBDCB500C7330C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2865E11A2FFC026A00C7330C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				2865E0FD2FFBDCB500C7330C /* CoreAnimationPerformanceTuning */,
+				2865E11E2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests */,
 				2865E0FC2FFBDCB500C7330C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				2865E0FB2FFBDCB500C7330C /* CoreAnimationPerformanceTuning.app */,
+				2865E11D2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +108,29 @@
 			productReference = 2865E0FB2FFBDCB500C7330C /* CoreAnimationPerformanceTuning.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2865E11C2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2865E1232FFC026A00C7330C /* Build configuration list for PBXNativeTarget "CoreAnimationPerformanceTuningTests" */;
+			buildPhases = (
+				2865E1192FFC026A00C7330C /* Sources */,
+				2865E11A2FFC026A00C7330C /* Frameworks */,
+				2865E11B2FFC026A00C7330C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2865E1222FFC026A00C7330C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2865E11E2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests */,
+			);
+			name = CoreAnimationPerformanceTuningTests;
+			packageProductDependencies = (
+			);
+			productName = CoreAnimationPerformanceTuningTests;
+			productReference = 2865E11D2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -95,6 +143,10 @@
 				TargetAttributes = {
 					2865E0FA2FFBDCB500C7330C = {
 						CreatedOnToolsVersion = 26.4;
+					};
+					2865E11C2FFC026A00C7330C = {
+						CreatedOnToolsVersion = 26.4;
+						TestTargetID = 2865E0FA2FFBDCB500C7330C;
 					};
 				};
 			};
@@ -113,12 +165,20 @@
 			projectRoot = "";
 			targets = (
 				2865E0FA2FFBDCB500C7330C /* CoreAnimationPerformanceTuning */,
+				2865E11C2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2865E0F92FFBDCB500C7330C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2865E11B2FFC026A00C7330C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +195,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2865E1192FFC026A00C7330C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2865E1222FFC026A00C7330C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2865E0FA2FFBDCB500C7330C /* CoreAnimationPerformanceTuning */;
+			targetProxy = 2865E1212FFC026A00C7330C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2865E10F2FFBDCB700C7330C /* Debug */ = {
@@ -323,6 +398,48 @@
 			};
 			name = Release;
 		};
+		2865E1242FFC026A00C7330C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3S93833V9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = vlad.com.CoreAnimationPerformanceTuningTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoreAnimationPerformanceTuning.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoreAnimationPerformanceTuning";
+			};
+			name = Debug;
+		};
+		2865E1252FFC026A00C7330C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3S93833V9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = vlad.com.CoreAnimationPerformanceTuningTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoreAnimationPerformanceTuning.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CoreAnimationPerformanceTuning";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -340,6 +457,15 @@
 			buildConfigurations = (
 				2865E10F2FFBDCB700C7330C /* Debug */,
 				2865E1102FFBDCB700C7330C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2865E1232FFC026A00C7330C /* Build configuration list for PBXNativeTarget "CoreAnimationPerformanceTuningTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2865E1242FFC026A00C7330C /* Debug */,
+				2865E1252FFC026A00C7330C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
