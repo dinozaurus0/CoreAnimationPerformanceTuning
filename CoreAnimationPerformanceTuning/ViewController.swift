@@ -14,19 +14,23 @@ final class ViewController: UIViewController {
         }
         
         print("Took \(elapsed)")
-        // Took 0.002885042 seconds
     }
     
     private func setupLayers() {
         let gradientLayer = gradientLayer()
+        let squareLayer = squareLayer()
         
-        let (gradientAnimation, ringAnimation) =
-        DispatchQueue.global().sync {
+        let (gradientAnimation, ringAnimation, squareAnimation) =
+//        DispatchQueue.global().sync {
             (
                 gradientColorsAnimation(using: gradientLayer.colors),
-                ringLayerAnimation()
+                ringLayerAnimation(),
+                squareLayerAnimation(
+                    from: squareLayer.position.x - 60,
+                    toValue: squareLayer.position.x + 60
+                )
             )
-        }
+//        }
         
         gradientLayer.add(gradientAnimation, forKey: "gradientColorShift")
         view.layer.addSublayer(gradientLayer)
@@ -35,6 +39,9 @@ final class ViewController: UIViewController {
         
         gradientLayer.addSublayer(ringLayer)
         ringLayer.add(ringAnimation, forKey: "ringDrawAndSpin")
+        
+        squareLayer.add(squareAnimation, forKey: "squareMoveLeftRight")
+        gradientLayer.addSublayer(squareLayer)
     }
     
     private func gradientLayer() -> CAGradientLayer {
@@ -119,6 +126,46 @@ final class ViewController: UIViewController {
         group.repeatCount = .infinity
         
         return group
+    }
+    
+    private func squareLayer() -> CAShapeLayer {
+        let squareLayer = CAShapeLayer()
+        
+        let squareSize: CGFloat = 60
+        
+        squareLayer.bounds = CGRect(
+            x: 0,
+            y: 0,
+            width: squareSize,
+            height: squareSize
+        )
+        squareLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
+        
+        squareLayer.path = UIBezierPath(
+            roundedRect: CGRect(x: 0, y: 0, width: squareSize, height: squareSize),
+            cornerRadius: 12
+        ).cgPath
+        
+        squareLayer.fillColor = UIColor.systemYellow.cgColor
+        squareLayer.cornerCurve = .continuous
+        
+        return squareLayer
+    }
+    
+    private func squareLayerAnimation(
+        from value: Any?,
+        toValue: Any?,
+    ) -> CABasicAnimation {
+        let animation = CABasicAnimation(keyPath: "position.x")
+        
+        animation.fromValue = value
+        animation.toValue = toValue
+        animation.duration = 1.4
+        animation.autoreverses = true
+        animation.repeatCount = .infinity
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        
+        return animation
     }
     
 }
