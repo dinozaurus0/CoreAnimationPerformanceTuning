@@ -1,22 +1,36 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    
-    private var gradientLayer = CAGradientLayer()
     private var bounds: CGRect = .zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bounds = view.bounds
-        setupLayers()
+        
+        let clock = ContinuousClock()
+        let elapsed = clock.measure {
+            setupLayers()
+        }
+        
+        print("Took \(elapsed)")
+        // Took 0.002885042 seconds
     }
     
     private func setupLayers() {
-        self.setupGradientLayer()
+        let gradientLayer = gradientLayer()
+        let gradientAnimation =
+//        DispatchQueue.global().sync {
+            gradientColorsAnimation(using: gradientLayer.colors)
+//        }
+        
+        gradientLayer.add(gradientAnimation, forKey: "gradientColorShift")
+        view.layer.addSublayer(gradientLayer)
     }
     
-    private func setupGradientLayer() {
+    private func gradientLayer() -> CAGradientLayer {
+        let gradientLayer = CAGradientLayer()
+        
         gradientLayer.bounds = bounds
         gradientLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
         
@@ -29,9 +43,28 @@ final class ViewController: UIViewController {
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         
-        DispatchQueue.main.async {
-            self.view.layer.addSublayer(self.gradientLayer)
-        }
+        return gradientLayer
+    }
+    
+    private func gradientColorsAnimation(
+        using colors: [Any]?
+    ) -> CABasicAnimation {
+        let colorAnimation = CABasicAnimation(keyPath: "colors")
+        
+        colorAnimation.fromValue = colors
+        
+        colorAnimation.toValue = [
+            UIColor.systemTeal.cgColor,
+            UIColor.systemPurple.cgColor,
+            UIColor.systemBlue.cgColor
+        ]
+        
+        colorAnimation.duration = 4
+        colorAnimation.autoreverses = true
+        colorAnimation.repeatCount = .infinity
+        colorAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        
+        return colorAnimation
     }
     
 }
