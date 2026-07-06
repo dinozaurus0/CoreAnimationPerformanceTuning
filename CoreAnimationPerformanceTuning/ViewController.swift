@@ -1,22 +1,20 @@
 import UIKit
 
-final class ViewController: UIViewController {
+public final class ViewController: UIViewController {
     private var bounds: CGRect = .zero
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         bounds = view.bounds
         
-        let clock = ContinuousClock()
-        let elapsed = clock.measure {
-            setupLayers()
-        }
-        
-        print("Took \(elapsed)")
+//        setupLayers()
     }
     
-    private func setupLayers() {
+    public func setupLayers(
+        didFinish: @escaping () -> Void
+    ) {
+//        DispatchQueue.global().async { [unowned self] in 
         let gradientLayer = gradientLayer()
         
         let squareLayer = squareLayer()
@@ -47,6 +45,8 @@ final class ViewController: UIViewController {
                 ringLayer.add(ringAnimation, forKey: "ringDrawAndSpin")
                 squareLayer.add(squareAnimation, forKey: "squareMoveLeftRight")
                 captionLayer.add(captionAnimation, forKey: "captionTransform")
+                
+                didFinish()
 //            }
 //        }
         
