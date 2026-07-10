@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2886226B3000997400CB99DC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 288622623000997400CB99DC /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2865E1212FFC026A00C7330C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19,6 +23,7 @@
 /* Begin PBXFileReference section */
 		2865E0FB2FFBDCB500C7330C /* CoreAnimationPerformanceTuning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreAnimationPerformanceTuning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2865E11D2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreAnimationPerformanceTuningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		288622623000997400CB99DC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -71,6 +76,7 @@
 				2865E0FD2FFBDCB500C7330C /* CoreAnimationPerformanceTuning */,
 				2865E11E2FFC026A00C7330C /* CoreAnimationPerformanceTuningTests */,
 				2865E0FC2FFBDCB500C7330C /* Products */,
+				288622623000997400CB99DC /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2886226B3000997400CB99DC /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
