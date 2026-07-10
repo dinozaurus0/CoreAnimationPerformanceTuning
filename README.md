@@ -13,10 +13,6 @@
 
 - Even if we bypass these guardrails, problems can still occur. Manipulating the layer hierarchy from a background thread can result in the UI rendering incorrectly — in practice, this often shows up as missing layers or other parts of the UI failing to appear.
 
-### Debug Environment Variables
-- CA_DEBUG_TRANSACTIONS - prints in console the stack trace that generated the issue.
-- CA_ASSERT_MAIN_THREAD_TRANSACTIONS - crashes app when the transaction is started from a background thread.
-
 ### Why This Happens
 
 Whenever a layer is touched, `CoreAnimation` implicitly opens a `CATransaction` behind the scenes to track the changes — this is known as an *implicit transaction*. At the end of the current run loop iteration, this transaction is pushed by `CoreAnimation` to the `RenderServer`. If the thread on which the transaction was opened isn't associated with a `RunLoop`, the transaction never gets sent to the render server.
@@ -36,3 +32,7 @@ Build the animations on a background thread, batch them together, and then add t
 Manually open a `CATransaction` on a background thread, build the entire layer hierarchy there, and then attach it to the `UIView` (the actual UIKit update would still need to happen on the main thread). To create a custom transaction, you'd use `CATransaction.begin()` and `CATransaction.end()` — this pair should commit the transaction regardless of which thread it runs on.
 
 > **Open question:** it's unclear whether this actually works in practice — specifically, how it would interact with the implicit transaction created when layers are subsequently touched on the main thread, and whether transactions opened on different threads would still be treated as nested/embedded transactions.
+
+### Debug Environment Variables
+- CA_DEBUG_TRANSACTIONS - prints in console the stack trace that generated the issue.
+- CA_ASSERT_MAIN_THREAD_TRANSACTIONS - crashes app when the transaction is started from a background thread.
