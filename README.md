@@ -29,7 +29,7 @@ Build the animations on a background thread, batch them together, and then add t
 
 **2. Manually manage a `CATransaction` on a background thread**
 
-Manually open a `CATransaction` on a background thread, build the entire layer hierarchy there, and then attach it to the `UIView` (the actual UIKit update would still need to happen on the main thread). To create a custom transaction, you'd use `CATransaction.begin()` and `CATransaction.end()` — this pair should commit the transaction regardless of which thread it runs on.
+Manually open a `CATransaction` on a background thread, build the entire layer hierarchy there, and then attach it to the `UIView` (the actual UIKit update would still need to happen on the main thread). To create a custom transaction, you'd use `CATransaction.begin()` and `CATransaction.commit()` — this pair should commit the transaction regardless of which thread it runs on.
 
 > **Open question:** it's unclear whether this actually works in practice — specifically, how it would interact with the implicit transaction created when layers are subsequently touched on the main thread, and whether transactions opened on different threads would still be treated as nested/embedded transactions.
 
