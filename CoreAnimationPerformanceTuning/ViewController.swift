@@ -8,28 +8,33 @@ public final class ViewController: UIViewController {
         
         bounds = view.bounds
         
-//        setupLayers()
+        setupLayers(didFinish: { rootLayer in
+            DispatchQueue.main.async {
+                self.view.layer.addSublayer(rootLayer)
+            }
+        })
     }
     
     public func setupLayers(
-        didFinish: @escaping () -> Void
+        didFinish: @escaping (CALayer) -> Void
     ) {
-//        DispatchQueue.global().async { [unowned self] in 
-        let gradientLayer = gradientLayer()
-        
-        let squareLayer = squareLayer()
-        gradientLayer.addSublayer(squareLayer)
-        
-        view.layer.addSublayer(gradientLayer)
-        
-        let ringLayer = ringLayer()
-        gradientLayer.addSublayer(ringLayer)
-        
-        let captionLayer = captionLayer()
-        gradientLayer.addSublayer(captionLayer)
-        
-//        DispatchQueue.global().async {
-//            assert(!Thread.current.isMainThread)
+        DispatchQueue.global().async { [unowned self] in
+            CATransaction.begin()
+            
+            let gradientLayer = gradientLayer()
+            
+            let squareLayer = squareLayer()
+            gradientLayer.addSublayer(squareLayer)
+            
+            
+            let ringLayer = ringLayer()
+            gradientLayer.addSublayer(ringLayer)
+            
+            let captionLayer = captionLayer()
+            gradientLayer.addSublayer(captionLayer)
+            
+            //        DispatchQueue.global().async {
+            //            assert(!Thread.current.isMainThread)
             let (gradientAnimation, ringAnimation, squareAnimation, captionAnimation) = (
                 self.gradientColorsAnimation(using: gradientLayer.colors),
                 self.ringLayerAnimation(),
@@ -40,15 +45,18 @@ public final class ViewController: UIViewController {
                 self.captionLayerAnimation()
             )
             
-//            DispatchQueue.main.async {
-                gradientLayer.add(gradientAnimation, forKey: "gradientColorShift")
-                ringLayer.add(ringAnimation, forKey: "ringDrawAndSpin")
-                squareLayer.add(squareAnimation, forKey: "squareMoveLeftRight")
-                captionLayer.add(captionAnimation, forKey: "captionTransform")
-                
-                didFinish()
-//            }
-//        }
+            //            DispatchQueue.main.async {
+            gradientLayer.add(gradientAnimation, forKey: "gradientColorShift")
+            ringLayer.add(ringAnimation, forKey: "ringDrawAndSpin")
+            squareLayer.add(squareAnimation, forKey: "squareMoveLeftRight")
+            captionLayer.add(captionAnimation, forKey: "captionTransform")
+            
+            CATransaction.commit()
+            
+            didFinish(gradientLayer)
+            
+            //            }
+        }
         
     }
     
@@ -121,13 +129,13 @@ public final class ViewController: UIViewController {
         stroke.toValue = 1
         stroke.duration = 2
         stroke.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-
+        
         let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotation.fromValue = 0
         rotation.toValue = CGFloat.pi * 2
         rotation.duration = 8
         rotation.repeatCount = .infinity
-
+        
         let group = CAAnimationGroup()
         group.animations = [stroke, rotation]
         group.duration = 8
@@ -200,12 +208,12 @@ public final class ViewController: UIViewController {
         var start = CATransform3DIdentity
         start.m34 = -1.0 / 500.0
         start = CATransform3DScale(start, 0.85, 0.85, 1)
-
+        
         var end = CATransform3DIdentity
         end.m34 = -1.0 / 500.0
         end = CATransform3DRotate(end, .pi / 10, 0, 1, 0)
         end = CATransform3DScale(end, 1.1, 1.1, 1)
-
+        
         let transformAnimation = CABasicAnimation(keyPath: "transform")
         transformAnimation.fromValue = start
         transformAnimation.toValue = end
